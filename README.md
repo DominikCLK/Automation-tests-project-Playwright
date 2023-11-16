@@ -27,6 +27,14 @@ Run all tests:
 
 ```
 npx playwright test
+
+Run all tests with tags:
+
+```
+
+npx playwright test --grep /tag/
+
 ```
 
 For more usage cases look in `package.json` scripts section.
+```
