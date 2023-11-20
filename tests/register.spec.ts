@@ -6,8 +6,8 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Verify register', () => {
   test('register with correct data and login @GAD-R03-01', async ({ page }) => {
-    const userFirstName = faker.person.firstName();
-    const userLastName = faker.person.lastName();
+    const userFirstName = faker.person.firstName().replace(/[^A-Za-z]/g, '');
+    const userLastName = faker.person.lastName().replace(/[^A-Za-z]/g, '');
     // const userEmail = `jntest${new Date().getTime()}@test.test1`;
     const userEmail = faker.internet.email({
       firstName: userFirstName,
