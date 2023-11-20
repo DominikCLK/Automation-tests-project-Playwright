@@ -21,4 +21,42 @@ test.describe('Verify login', () => {
     expect(title).toContain('Welcome');
     await expect(page).toHaveURL(welcomePage.url);
   });
+
+  test('reject login with incorrect password @GAD-R02-01', async ({ page }) => {
+    // Arrange
+    const userEmail = testUser1.userEmail;
+    const userPassword = testUser1.incorrectUserPassword;
+    const loginPage = new LoginPage(page);
+
+    // Act
+    await loginPage.goto();
+    await loginPage.login(userEmail, userPassword);
+
+    //Assert
+    await expect
+      .soft(loginPage.loginError)
+      .toHaveText('Invalid username or password');
+
+    const title = await loginPage.title();
+    expect.soft(title).toContain('Login');
+  });
+
+  test('reject login with incorrect email @GAD-R02-01', async ({ page }) => {
+    // Arrange
+    const userEmail = testUser1.userEmail;
+    const userPassword = testUser1.incorrectUserEmail;
+    const loginPage = new LoginPage(page);
+
+    // Act
+    await loginPage.goto();
+    await loginPage.login(userEmail, userPassword);
+
+    //Assert
+    await expect
+      .soft(loginPage.loginError)
+      .toHaveText('Invalid username or password');
+
+    const title = await loginPage.title();
+    expect.soft(title).toContain('Login');
+  });
 });
