@@ -14,17 +14,11 @@ export class LoginPage extends BasePage {
     super(page);
   }
 
-  async login(email: string, password: string): Promise<void> {
-    await this.userEmailInput.fill(email);
-    await this.userPasswordInput.fill(password);
-    await this.loginButton.click();
-  }
-
   async waitForPageToLoadUrl(): Promise<void> {
     await this.page.waitForURL(this.url);
   }
 
-  async loginNew(loginUserData: LoginUser): Promise<void> {
+  async login(loginUserData: LoginUser): Promise<void> {
     await this.userEmailInput.fill(loginUserData.userEmail);
     await this.userPasswordInput.fill(loginUserData.userPassword);
     await this.loginButton.click();
