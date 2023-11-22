@@ -1,4 +1,4 @@
-import { LoginUser } from '../src/models/user.models';
+import { LoginUser } from '../src/models/user.model';
 import { LoginPage } from '../src/pages/login.page';
 import { WelcomePage } from '../src/pages/welcome.page';
 import { testUser1 } from '../src/test-data/user.data';
