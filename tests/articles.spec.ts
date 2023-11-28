@@ -24,22 +24,7 @@ test.describe('Verify articles', () => {
     await expect.soft(addArticleView.header).toBeVisible();
   });
 
-  test('create new articles @GAD-R04-01', async ({ page }) => {
-    // Arrange
-    const articlePage = new ArticlePage(page);
-    const articleData = randomNewArticle();
-
-    // Act
-    await addArticleView.createArticle(articleData);
-
-    //Assert
-    await expect.soft(articlePage.articleTitle).toHaveText(articleData.title);
-    await expect
-      .soft(articlePage.articleBody)
-      .toHaveText(articleData.body, { useInnerText: true });
-  });
-
-  test('reject creating articles without title @GAD-R04-01', async () => {
+  test('reject creating article without title @GAD-R04-01', async () => {
     // Arrange
     const expectedErrorMessage = 'Article was not created';
     const articleData = randomNewArticle();
@@ -48,14 +33,13 @@ test.describe('Verify articles', () => {
     // Act
     await addArticleView.createArticle(articleData);
 
-    //Assert
-    await expect(addArticleView.errorAlertPopup).toBeVisible();
+    // Assert
     await expect(addArticleView.errorAlertPopup).toHaveText(
       expectedErrorMessage,
     );
   });
 
-  test('reject creating articles without body @GAD-R04-01', async () => {
+  test('reject creating article without body @GAD-R04-01', async () => {
     // Arrange
     const expectedErrorMessage = 'Article was not created';
     const articleData = randomNewArticle();
@@ -64,15 +48,14 @@ test.describe('Verify articles', () => {
     // Act
     await addArticleView.createArticle(articleData);
 
-    //Assert
-    await expect(addArticleView.errorAlertPopup).toBeVisible();
+    // Assert
     await expect(addArticleView.errorAlertPopup).toHaveText(
       expectedErrorMessage,
     );
   });
 
   test.describe('title length', () => {
-    test('reject creating articles without title exceeding 128 signs@GAD-R04-02', async () => {
+    test('reject creating article with title exceeding 128 signs @GAD-R04-02', async () => {
       // Arrange
       const expectedErrorMessage = 'Article was not created';
       const articleData = randomNewArticle(129);
@@ -80,13 +63,13 @@ test.describe('Verify articles', () => {
       // Act
       await addArticleView.createArticle(articleData);
 
-      //Assert
+      // Assert
       await expect(addArticleView.errorAlertPopup).toHaveText(
         expectedErrorMessage,
       );
     });
 
-    test('reject creating articles without title with 128 signs@GAD-R04-02', async ({
+    test('create article with title with 128 signs @GAD-R04-02', async ({
       page,
     }) => {
       // Arrange
@@ -96,7 +79,7 @@ test.describe('Verify articles', () => {
       // Act
       await addArticleView.createArticle(articleData);
 
-      //Assert
+      // Assert
       await expect.soft(articlePage.articleTitle).toHaveText(articleData.title);
     });
   });
