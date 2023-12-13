@@ -1,4 +1,4 @@
-import { ArticlePage } from '../../src/pages/articles.page';
+import { ArticlesPage } from '../../src/pages/articles.page';
 import { CommentsPage } from '../../src/pages/comments.page';
 import { HomePage } from '../../src/pages/home.page';
 import { expect, test } from '@playwright/test';
@@ -8,7 +8,7 @@ test.describe('Verify main menu buttons', () => {
     page,
   }) => {
     // Arrange
-    const articlesPage = new ArticlePage(page);
+    const articlesPage = new ArticlesPage(page);
 
     // Act
     await articlesPage.goto();
@@ -29,7 +29,7 @@ test.describe('Verify main menu buttons', () => {
     // Act
     await commentsPage.goto();
     await commentsPage.mainMenu.articlesButton.click();
-    const articlesPage = new ArticlePage(page);
+    const articlesPage = new ArticlesPage(page);
     const title = await articlesPage.title();
 
     // Assert
