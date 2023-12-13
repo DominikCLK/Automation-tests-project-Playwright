@@ -9,12 +9,12 @@ test.describe('Verify main menu buttons', () => {
   }) => {
     // Arrange
     const articlesPage = new ArticlesPage(page);
+    const commentsPage = new CommentsPage(page);
     const expectedCommentsTitle = 'Comments';
 
     // Act
     await articlesPage.goto();
     await articlesPage.mainMenu.commentButton.click();
-    const commentsPage = new CommentsPage(page);
     const title = await commentsPage.getTitle();
 
     // Assert
@@ -25,13 +25,13 @@ test.describe('Verify main menu buttons', () => {
     page,
   }) => {
     // Arrange
+    const articlesPage = new ArticlesPage(page);
     const commentsPage = new CommentsPage(page);
     const expectedArticlesTitle = 'Articles';
 
     // Act
     await commentsPage.goto();
     await commentsPage.mainMenu.articlesButton.click();
-    const articlesPage = new ArticlesPage(page);
     const title = await articlesPage.getTitle();
 
     // Assert

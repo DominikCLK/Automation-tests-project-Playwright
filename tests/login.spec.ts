@@ -8,13 +8,13 @@ test.describe('Verify login', () => {
   test('Login with correct credentials @GAD-R02-01', async ({ page }) => {
     // Arrange
     const loginPage = new LoginPage(page);
+    const welcomePage = new WelcomePage(page);
     const expectedWelcomeTitle = 'Welcome';
 
     // Act
     await loginPage.goto();
     await loginPage.login(testUser1);
 
-    const welcomePage = new WelcomePage(page);
     const title = await welcomePage.getTitle();
 
     //Assert
@@ -24,12 +24,12 @@ test.describe('Verify login', () => {
 
   test('reject login with incorrect password @GAD-R02-01', async ({ page }) => {
     // Arrange
+    const loginPage = new LoginPage(page);
     const loginUserData: LoginUserModel = {
       userEmail: testUser1.userEmail,
       userPassword: 'incorrectPassword',
     };
 
-    const loginPage = new LoginPage(page);
     const expectedLoginTitle = 'Login';
 
     // Act
