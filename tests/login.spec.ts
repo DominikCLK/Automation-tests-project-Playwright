@@ -1,7 +1,7 @@
 import { LoginUserModel } from '../src/models/user.model';
 import { LoginPage } from '../src/pages/login.page';
 import { WelcomePage } from '../src/pages/welcome.page';
-import { testUser1 } from '../src/test-data/user.data';
+import { invalidTestUser1, testUser1 } from '../src/test-data/user.data';
 import { expect, test } from '@playwright/test';
 
 test.describe('Verify login', () => {
@@ -27,7 +27,7 @@ test.describe('Verify login', () => {
     const loginPage = new LoginPage(page);
     const loginUserData: LoginUserModel = {
       userEmail: testUser1.userEmail,
-      userPassword: 'incorrectPassword',
+      userPassword: invalidTestUser1.invalidUserPassword,
     };
 
     const expectedLoginTitle = 'Login';
@@ -48,7 +48,7 @@ test.describe('Verify login', () => {
   test('reject login with incorrect email @GAD-R02-01', async ({ page }) => {
     // Arrange
     const loginUserData: LoginUserModel = {
-      userEmail: 'test@test.test',
+      userEmail: invalidTestUser1.invalidUserEmail,
       userPassword: testUser1.userPassword,
     };
     const loginPage = new LoginPage(page);

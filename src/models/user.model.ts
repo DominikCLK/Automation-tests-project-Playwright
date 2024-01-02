@@ -8,3 +8,7 @@ export interface LoginUserModel {
   userEmail: string;
   userPassword: string;
 }
+export interface InvalidLoginUserModel {
+  invalidUserEmail: string;
+  invalidUserPassword: string;
+}
