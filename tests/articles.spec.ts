@@ -1,4 +1,4 @@
-import { randomNewArticle } from '../src/factories/articles.factory';
+import { prepareRandomNewArticle } from '../src/factories/articles.factory';
 import { ArticlePage } from '../src/pages/article.page';
 import { ArticlesPage } from '../src/pages/articles.page';
 import { LoginPage } from '../src/pages/login.page';
@@ -21,13 +21,13 @@ test.describe('Verify articles', () => {
     await articlesPage.goto();
     await articlesPage.addArticleButtonLogged.click();
 
-    await expect.soft(addArticleView.header).toBeVisible();
+    await expect.soft(addArticleView.addNewHeader).toBeVisible();
   });
 
   test('reject creating article without title @GAD-R04-01', async () => {
     // Arrange
     const expectedErrorMessage = 'Article was not created';
-    const articleData = randomNewArticle();
+    const articleData = prepareRandomNewArticle();
     articleData.title = '';
 
     // Act
@@ -42,7 +42,7 @@ test.describe('Verify articles', () => {
   test('reject creating article without body @GAD-R04-01', async () => {
     // Arrange
     const expectedErrorMessage = 'Article was not created';
-    const articleData = randomNewArticle();
+    const articleData = prepareRandomNewArticle();
     articleData.body = '';
 
     // Act
@@ -58,7 +58,7 @@ test.describe('Verify articles', () => {
     test('reject creating article with title exceeding 128 signs @GAD-R04-02', async () => {
       // Arrange
       const expectedErrorMessage = 'Article was not created';
-      const articleData = randomNewArticle(129);
+      const articleData = prepareRandomNewArticle(129);
 
       // Act
       await addArticleView.createArticle(articleData);
@@ -74,7 +74,7 @@ test.describe('Verify articles', () => {
     }) => {
       // Arrange
       const articlePage = new ArticlePage(page);
-      const articleData = randomNewArticle(128);
+      const articleData = prepareRandomNewArticle(128);
 
       // Act
       await addArticleView.createArticle(articleData);
