@@ -2,6 +2,7 @@ import { prepareRandomArticle } from '../../src/factories/articles.factory';
 import { AddArticleModel } from '../../src/models/article.model';
 import { ArticlePage } from '../../src/pages/article.page';
 import { ArticlesPage } from '../../src/pages/articles.page';
+import { CommentPage } from '../../src/pages/comment.page';
 import { LoginPage } from '../../src/pages/login.page';
 import { testUser1 } from '../../src/test-data/user.data';
 import { AddArticleView } from '../../src/views/add-articles.view';
@@ -15,6 +16,7 @@ test.describe('Create, verify and delete comment', () => {
   let articleData: AddArticleModel;
   let articlePage: ArticlePage;
   let addCommentView: AddCommentView;
+  let commentPage: CommentPage;
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
@@ -22,6 +24,7 @@ test.describe('Create, verify and delete comment', () => {
     addArticleView = new AddArticleView(page);
     articlePage = new ArticlePage(page);
     addCommentView = new AddCommentView(page);
+    commentPage = new CommentPage(page);
 
     articleData = prepareRandomArticle();
     await loginPage.goto();
@@ -32,23 +35,33 @@ test.describe('Create, verify and delete comment', () => {
     await addArticleView.createArticle(articleData);
   });
 
-  test('create new comment @GAD-R05-01', async () => {
+  test('create new comment @GAD-R05-01', async ({}) => {
     //Create mew comment
     // Arrange
     const expectedAddCommentHeader = 'Add New Comment';
     const expectedCommentCreatedPopup = 'Comment was created';
+    const commentText = 'Hello!';
 
     //Act
     await articlePage.addCommentButton.click();
     await expect(addCommentView.addNewHeader).toHaveText(
       expectedAddCommentHeader,
     );
-    await addCommentView.bodyInput.fill('Hello!');
+    await addCommentView.bodyInput.fill(commentText);
     await addCommentView.saveButton.click();
 
     //Assert
     await expect(articlePage.errorAlertPopup).toHaveText(
       expectedCommentCreatedPopup,
     );
+
+    // Verity comment
+    // Act
+    const articleComment = articlePage.getArticleComment(commentText);
+    await expect(articleComment.body).toHaveText(commentText);
+    await articleComment.link.click();
+
+    // Assert
+    await expect(commentPage.commentBody).toHaveText(commentText);
   });
 });
