@@ -1,4 +1,4 @@
-import { prepareRandomNewArticle } from '../../src/factories/articles.factory';
+import { prepareRandomArticle } from '../../src/factories/articles.factory';
 import { AddArticleModel } from '../../src/models/article.model';
 import { ArticlePage } from '../../src/pages/article.page';
 import { ArticlesPage } from '../../src/pages/articles.page';
@@ -28,8 +28,8 @@ test.describe('Create, verify and delete article', () => {
 
   test('create new article @GAD-R04-01', async () => {
     // Arrange
-    articleData = prepareRandomNewArticle();
-
+    articleData = prepareRandomArticle();
+    
     // Act
     await articlesPage.addArticleButtonLogged.click();
     await expect.soft(addArticleView.addNewHeader).toBeVisible();
