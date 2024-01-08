@@ -9,31 +9,33 @@ test.describe('Verify main menu buttons', () => {
   }) => {
     // Arrange
     const articlesPage = new ArticlesPage(page);
+    const commentsPage = new CommentsPage(page);
+    const expectedCommentsTitle = 'Comments';
 
     // Act
     await articlesPage.goto();
     await articlesPage.mainMenu.commentButton.click();
-    const commentsPage = new CommentsPage(page);
-    const title = await commentsPage.title();
+    const title = await commentsPage.getTitle();
 
     // Assert
-    expect(title).toContain('Comments');
+    expect(title).toContain(expectedCommentsTitle);
   });
 
   test('articles button navigates to articles page @GAD-R01-03', async ({
     page,
   }) => {
     // Arrange
+    const articlesPage = new ArticlesPage(page);
     const commentsPage = new CommentsPage(page);
+    const expectedArticlesTitle = 'Articles';
 
     // Act
     await commentsPage.goto();
     await commentsPage.mainMenu.articlesButton.click();
-    const articlesPage = new ArticlesPage(page);
-    const title = await articlesPage.title();
+    const title = await articlesPage.getTitle();
 
     // Assert
-    expect(title).toContain('Articles');
+    expect(title).toContain(expectedArticlesTitle);
   });
 
   test('home page button navigates to home page @GAD-R01-03', async ({
@@ -41,14 +43,15 @@ test.describe('Verify main menu buttons', () => {
   }) => {
     // Arrange
     const commentsPage = new CommentsPage(page);
+    const expectedHomePageTitle = 'GAD';
 
     // Act
     await commentsPage.goto();
     await commentsPage.mainMenu.homePage.click();
     const homePage = new HomePage(page);
-    const title = await homePage.title();
+    const title = await homePage.getTitle();
 
     // Assert
-    expect(title).toContain('GAD');
+    expect(title).toContain(expectedHomePageTitle);
   });
 });
