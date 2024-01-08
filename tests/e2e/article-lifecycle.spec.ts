@@ -29,7 +29,7 @@ test.describe('Create, verify and delete article', () => {
   test('create new article @GAD-R04-01', async () => {
     // Arrange
     articleData = prepareRandomArticle();
-    
+
     // Act
     await articlesPage.addArticleButtonLogged.click();
     await expect.soft(addArticleView.addNewHeader).toBeVisible();

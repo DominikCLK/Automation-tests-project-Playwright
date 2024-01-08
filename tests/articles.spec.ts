@@ -76,7 +76,6 @@ test.describe('Verify articles', () => {
       const articlePage = new ArticlePage(page);
       const articleData = prepareRandomArticle(128);
 
-
       // Act
       await addArticleView.createArticle(articleData);
 
