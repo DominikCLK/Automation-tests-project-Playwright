@@ -35,6 +35,8 @@ Steps:
 3. Run ``` npm run start ```
 Application will be available at ``` http://localhost:3000```
 
+![2024-01-12_18h03_04](https://github.com/DominikCLK/Automation-tests-project-Playwright/assets/75272795/535ca31b-352e-4979-b8c4-234deb5a4bc2)
+
 ## Use
 
 Run all tests:
@@ -52,3 +54,5 @@ npx playwright test --grep /tag/
 
 For more usage cases look in `package.json` scripts section.
 ```
+
+
