@@ -2,31 +2,26 @@ import { prepareRandomArticle } from '../../src/factories/articles.factory';
 import { AddArticleModel } from '../../src/models/article.model';
 import { ArticlePage } from '../../src/pages/article.page';
 import { ArticlesPage } from '../../src/pages/articles.page';
-import { LoginPage } from '../../src/pages/login.page';
-import { testUser1 } from '../../src/test-data/user.data';
 import { AddArticleView } from '../../src/views/add-articles.view';
 import { expect, test } from '@playwright/test';
 
 test.describe.configure({ mode: 'serial' });
 test.describe('Create, verify and delete article', () => {
-  let loginPage: LoginPage;
   let articlesPage: ArticlesPage;
   let addArticleView: AddArticleView;
   let articleData: AddArticleModel;
   let articlePage: ArticlePage;
 
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
+    // loginPage = new LoginPage(page);
     articlesPage = new ArticlesPage(page);
     addArticleView = new AddArticleView(page);
     articlePage = new ArticlePage(page);
 
-    await loginPage.goto();
-    await loginPage.login(testUser1);
     await articlesPage.goto();
   });
 
-  test('create new article @GAD-R04-01', async () => {
+  test('create new article @GAD-R04-01 @logged', async () => {
     // Arrange
     articleData = prepareRandomArticle();
 
@@ -42,7 +37,7 @@ test.describe('Create, verify and delete article', () => {
       .toHaveText(articleData.body, { useInnerText: true });
   });
 
-  test('user can access single article @GAD-R04-03', async () => {
+  test('user can access single article @GAD-R04-03 @logged', async () => {
     // Act
     await articlesPage.gotoArticle(articleData.title);
 
@@ -53,7 +48,7 @@ test.describe('Create, verify and delete article', () => {
       .toHaveText(articleData.body, { useInnerText: true });
   });
 
-  test('user can delete his own article @GAD-R04-04', async () => {
+  test('user can delete his own article @GAD-R04-04 @logged', async () => {
     // Arrange
     await articlesPage.gotoArticle(articleData.title);
     const toContainArticlesTitle = 'Articles';
