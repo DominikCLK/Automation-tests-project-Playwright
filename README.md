@@ -23,6 +23,18 @@ Follow instructions in app README
 - prepare local env file : `cp .env-template .env`
 - copy app main URL as value `BASE_URL` variable in `.env` file
 
+## Deploy on Local
+Requirements:
+
+- node.js installed in system
+
+Steps:
+
+1. Open project root directory in cmd/terminal
+2. Run ``` npm i```
+3. Run ``` npm run start ```
+Application will be available at ``` http://localhost:3000```
+
 ## Use
 
 Run all tests:
