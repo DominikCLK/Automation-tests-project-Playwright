@@ -1,19 +1,17 @@
 import { LoginUserModel } from '@_src/models/user.model';
 import { LoginPage } from '@_src/pages/login.page';
-import { WelcomePage } from '@_src/pages/welcome.page';
 import { invalidTestUser1, testUser1 } from '@_src/test-data/user.data';
 import { expect, test } from '@playwright/test';
 
 test.describe('Verify login', () => {
   test('Login with correct credentials @GAD-R02-01', async ({ page }) => {
     // Arrange
-    const loginPage = new LoginPage(page);
-    const welcomePage = new WelcomePage(page);
     const expectedWelcomeTitle = 'Welcome';
+    const loginPage = new LoginPage(page);
 
     // Act
     await loginPage.goto();
-    await loginPage.login(testUser1);
+    const welcomePage = await loginPage.login(testUser1);
 
     const title = await welcomePage.getTitle();
 
