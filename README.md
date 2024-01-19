@@ -24,6 +24,7 @@ Follow instructions in app README
 - copy app main URL as value `BASE_URL` variable in `.env` file
 
 ## Deploy on Local
+
 Requirements:
 
 - node.js installed in system
@@ -31,9 +32,9 @@ Requirements:
 Steps:
 
 1. Open project root directory in cmd/terminal
-2. Run ``` npm i```
-3. Run ``` npm run start ```
-Application will be available at ``` http://localhost:3000```
+2. Run ` npm i`
+3. Run `npm run start`
+   Application will be available at ` http://localhost:3000`
 
 ![2024-01-12_18h03_04](https://github.com/DominikCLK/Automation-tests-project-Playwright/assets/75272795/535ca31b-352e-4979-b8c4-234deb5a4bc2)
 
@@ -54,5 +55,3 @@ npx playwright test --grep /tag/
 
 For more usage cases look in `package.json` scripts section.
 ```
-
-
