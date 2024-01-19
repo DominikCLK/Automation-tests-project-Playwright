@@ -13,7 +13,6 @@ test.describe('Create, verify and delete article', () => {
   let articlePage: ArticlePage;
 
   test.beforeEach(async ({ page }) => {
-    // loginPage = new LoginPage(page);
     articlesPage = new ArticlesPage(page);
     addArticleView = new AddArticleView(page);
     articlePage = new ArticlePage(page);
@@ -55,7 +54,7 @@ test.describe('Create, verify and delete article', () => {
     const expectedNoResultText = 'No data';
 
     // Act
-    await articlePage.deleteArticle();
+    articlesPage = await articlePage.deleteArticle();
 
     // Assert
     await articlesPage.waitForPageToLoadUrl();
