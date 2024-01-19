@@ -4,7 +4,7 @@ import { WelcomePage } from '@_src/pages/welcome.page';
 import { testUser1 } from '@_src/test-data/user.data';
 import { expect, test as setup } from '@playwright/test';
 
-setup('Login with correct credentials', async ({ page }) => {
+setup('Login and save session', async ({ page }) => {
   // Arrange
   const loginPage = new LoginPage(page);
   const welcomePage = new WelcomePage(page);
