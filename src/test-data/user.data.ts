@@ -4,7 +4,7 @@ import {
   USER_INCORRECT_PASSWORD,
   USER_PASSWORD,
 } from '../env.config';
-import { InvalidLoginUserModel, LoginUserModel } from '../models/user.model';
+import { InvalidLoginUserModel, LoginUserModel } from '@_src/models/user.model';
 
 export const testUser1: LoginUserModel = {
   userEmail: USER_EMAIL,
