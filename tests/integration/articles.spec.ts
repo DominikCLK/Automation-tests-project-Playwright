@@ -1,5 +1,4 @@
 import { prepareRandomArticle } from '@_src/factories/articles.factory';
-import { ArticlePage } from '@_src/pages/article.page';
 import { ArticlesPage } from '@_src/pages/articles.page';
 import { AddArticleView } from '@_src/views/add-articles.view';
 import { expect, test } from '@playwright/test';
@@ -10,10 +9,9 @@ test.describe('Verify articles', () => {
 
   test.beforeEach(async ({ page }) => {
     articlesPage = new ArticlesPage(page);
-    addArticleView = new AddArticleView(page);
 
     await articlesPage.goto();
-    await articlesPage.addArticleButtonLogged.click();
+    addArticleView = await articlesPage.clickAddArticleButtonLogged();
 
     await expect.soft(addArticleView.addNewHeader).toBeVisible();
   });
@@ -63,15 +61,12 @@ test.describe('Verify articles', () => {
       );
     });
 
-    test('create article with title with 128 signs @GAD-R04-02 @logged', async ({
-      page,
-    }) => {
+    test('create article with title with 128 signs @GAD-R04-02 @logged', async () => {
       // Arrange
-      const articlePage = new ArticlePage(page);
       const articleData = prepareRandomArticle(128);
 
       // Act
-      await addArticleView.createArticle(articleData);
+      const articlePage = await addArticleView.createArticle(articleData);
 
       // Assert
       await expect.soft(articlePage.articleTitle).toHaveText(articleData.title);
