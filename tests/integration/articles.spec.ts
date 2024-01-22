@@ -2,13 +2,6 @@ import { prepareRandomArticle } from '@_src/factories/articles.factory';
 import { expect, test } from '@_src/fixtures/merge.fixture';
 
 test.describe('Verify articles', () => {
-  test.beforeEach(async ({ articlesPage, addArticleView }) => {
-    await articlesPage.goto();
-    await articlesPage.clickAddArticleButtonLogged();
-
-    await expect.soft(addArticleView.addNewHeader).toBeVisible();
-  });
-
   test('reject creating article without title @GAD-R04-01 @logged', async ({
     addArticleView,
   }) => {
