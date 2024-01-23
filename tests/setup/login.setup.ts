@@ -9,7 +9,6 @@ setup('Login and save session', async ({ loginPage, page }) => {
   // Act
   await loginPage.goto();
   const welcomePage = await loginPage.login(testUser1);
-
   const title = await welcomePage.getTitle();
 
   //Assert
