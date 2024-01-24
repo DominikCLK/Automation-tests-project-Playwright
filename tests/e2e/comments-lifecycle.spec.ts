@@ -1,26 +1,20 @@
 import { prepareRandomArticle } from '@_src/factories/articles.factory';
 import { prepareRandomComment } from '@_src/factories/comment.factory';
+import { expect, test } from '@_src/fixtures/merge.fixture';
 import { AddArticleModel } from '@_src/models/article.model';
 import { AddCommentModel } from '@_src/models/comment.model';
 import { ArticlePage } from '@_src/pages/article.page';
-import { ArticlesPage } from '@_src/pages/articles.page';
-import { expect, test } from '@playwright/test';
 
 test.describe('Create, verify and delete comment', () => {
   let articleData: AddArticleModel;
   let articlePage: ArticlePage;
 
-  test.beforeEach(async ({ page }) => {
-    const articlesPage = new ArticlesPage(page);
+  test.beforeEach(async ({ addArticleView }) => {
     articleData = prepareRandomArticle();
-
-    await articlesPage.goto();
-    const addArticleView = await articlesPage.clickAddArticleButtonLogged();
     articlePage = await addArticleView.createArticle(articleData);
   });
 
   test('operate on comment @GAD-R05-01 @GAD-R05-02 @GAD-R05-03 @logged', async () => {
-    //Create mew comment
     // Arrange
     const newCommentData = prepareRandomComment();
 
@@ -29,7 +23,6 @@ test.describe('Create, verify and delete comment', () => {
       const expectedAddCommentHeader = 'Add New Comment';
       const expectedCommentCreatedPopup = 'Comment was created';
 
-      //Create mew comment
       //Act
       const addCommentView = await articlePage.clickAddCommentButton();
       await expect
@@ -45,7 +38,6 @@ test.describe('Create, verify and delete comment', () => {
     });
 
     let commentPage = await test.step('verify comment', async () => {
-      // Verity comment
       // Act
       const articleComment = articlePage.getArticleComment(newCommentData.body);
       await expect(articleComment.body).toHaveText(newCommentData.body);

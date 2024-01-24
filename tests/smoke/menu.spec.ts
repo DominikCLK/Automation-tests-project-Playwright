@@ -1,14 +1,11 @@
-import { ArticlesPage } from '@_src/pages/articles.page';
-import { CommentsPage } from '@_src/pages/comments.page';
-import { expect, test } from '@playwright/test';
+import { expect, test } from '@_src/fixtures/merge.fixture';
 
 test.describe('Verify main menu buttons', () => {
   test('comments button navigates to comments page @GAD-R01-03', async ({
-    page,
+    articlesPage,
   }) => {
     // Arrange
     const expectedCommentsTitle = 'Comments';
-    const articlesPage = new ArticlesPage(page);
 
     // Act
     await articlesPage.goto();
@@ -20,11 +17,10 @@ test.describe('Verify main menu buttons', () => {
   });
 
   test('articles button navigates to articles page @GAD-R01-03', async ({
-    page,
+    commentsPage,
   }) => {
     // Arrange
     const expectedArticlesTitle = 'Articles';
-    const commentsPage = new CommentsPage(page);
 
     // Act
     await commentsPage.goto();
@@ -36,14 +32,12 @@ test.describe('Verify main menu buttons', () => {
   });
 
   test('home page button navigates to home page @GAD-R01-03', async ({
-    page,
+    articlesPage,
   }) => {
     // Arrange
     const expectedHomePageTitle = 'GAD';
-    const articlesPage = new ArticlesPage(page);
 
     // Act
-    await articlesPage.goto();
     const homePage = await articlesPage.mainMenu.clickHomePageLink();
     const title = await homePage.getTitle();
 
