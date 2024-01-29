@@ -1,14 +1,22 @@
+import { prepareRandomArticle } from '@_src/factories/articles.factory';
 import { prepareRandomComment } from '@_src/factories/comment.factory';
 import { expect, test } from '@_src/fixtures/merge.fixture';
+import { AddArticleModel } from '@_src/models/article.model';
 import { AddCommentModel } from '@_src/models/comment.model';
+import { ArticlePage } from '@_src/pages/article.page';
 
 test.describe('Create, verify and delete comment', () => {
-  test('operate on comment @GAD-R05-01 @GAD-R05-02 @GAD-R05-03 @logged', async ({
-    createRandomArticle,
-  }) => {
+  let articleData: AddArticleModel;
+  let articlePage: ArticlePage;
+
+  test.beforeEach(async ({ addArticleView }) => {
+    articleData = prepareRandomArticle();
+    articlePage = await addArticleView.createArticle(articleData);
+  });
+
+  test('operate on comment @GAD-R05-01 @GAD-R05-02 @GAD-R05-03 @logged', async () => {
     // Arrange
     const newCommentData = prepareRandomComment();
-    let articlePage = createRandomArticle.articlePage;
 
     await test.step('create a new comment', async () => {
       //Arrange
@@ -41,6 +49,7 @@ test.describe('Create, verify and delete comment', () => {
       return commentPage;
     });
 
+    //Edit comment
     let editCommentData: AddCommentModel;
     await test.step('update comment', async () => {
       //Arrange
@@ -64,7 +73,6 @@ test.describe('Create, verify and delete comment', () => {
       const updatedArticleComment = articlePage.getArticleComment(
         editCommentData.body,
       );
-
       //Assert
       await expect(updatedArticleComment.body).toHaveText(editCommentData.body);
     });
