@@ -1,6 +1,6 @@
-import { RESPONSE_TIMEOUT } from '@_pw-config';
 import { prepareRandomComment } from '@_src/factories/comment.factory';
 import { expect, test } from '@_src/fixtures/merge.fixture';
+import { waitForResponse } from '@_src/utils/wait.util';
 
 test.describe('Verify comment', () => {
   test('should return created comment @GAD-R07-06 @logged', async ({
@@ -14,15 +14,7 @@ test.describe('Verify comment', () => {
     let articlePage = createRandomArticle.articlePage;
     const addCommentView = await articlePage.clickAddCommentButton();
 
-    const responsePromise = page.waitForResponse(
-      (response) => {
-        return (
-          response.url().includes('/api/comments') &&
-          response.request().method() == 'GET'
-        );
-      },
-      { timeout: RESPONSE_TIMEOUT },
-    );
+    const responsePromise = waitForResponse(page, '/api/comments', 'GET');
 
     // Act
     articlePage = await addCommentView.createComment(newCommentData);
@@ -32,6 +24,7 @@ test.describe('Verify comment', () => {
     await expect
       .soft(articlePage.errorAlertPopup)
       .toHaveText(expectedCommentCreatedPopup);
+
     expect(response.ok()).toBeTruthy();
   });
 });
