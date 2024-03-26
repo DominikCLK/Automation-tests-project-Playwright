@@ -28,4 +28,27 @@ test.describe('Verify articles API endpoint @GAD-R08-01 @api', () => {
     // Assert
     expect(responseJson.length).toBeGreaterThanOrEqual(expectedMinArticleCount);
   });
+
+  test('GET articles return article object', async ({ request }) => {
+    // Arrange
+    const articleUrl = '/api/articles';
+    const expectedRequiredFields = [
+      'id',
+      'user_id',
+      'title',
+      'body',
+      'date',
+      'image',
+    ];
+
+    // Act
+    const response = await request.get(articleUrl);
+    const responseJson = await response.json();
+    const article = responseJson[0];
+
+    // Assert
+    expectedRequiredFields.forEach((key) => {
+      expect.soft(article).toHaveProperty(key);
+    });
+  });
 });
