@@ -14,11 +14,6 @@ export async function waitForResponse(
 ): Promise<Response> {
   return waitParams.page.waitForResponse(
     async (response) => {
-      // console.log(
-      //   response.status(),
-      //   response.request().method(),
-      //   response.url(),
-      // );
       return (
         response.url().includes(waitParams.url) &&
         (!waitParams.method ||
