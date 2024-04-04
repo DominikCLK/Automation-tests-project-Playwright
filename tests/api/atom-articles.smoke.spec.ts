@@ -48,7 +48,9 @@ test.describe('Verify articles API endpoint @GAD-R08-01 @api', () => {
 
     // Assert
     expectedRequiredFields.forEach((key) => {
-      expect.soft(article).toHaveProperty(key);
+      expect
+        .soft(article, `Expected key '${key}' should be in object`)
+        .toHaveProperty(key);
     });
   });
 });
