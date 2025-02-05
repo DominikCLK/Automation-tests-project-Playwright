@@ -40,4 +40,5 @@ jobs:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
           USER_INCORRECT_EMAIL: ${{ secrets.USER_INCORRECT_EMAIL }}
+          USER_INCORRECT_PASSWORD: ${{ secrets.USER_INCORRECT_PASSWORD }}
         run: npm run test
