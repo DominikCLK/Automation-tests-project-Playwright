@@ -19,21 +19,28 @@ jobs:
         ports:
           - 3000:3000
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
           registry-url: "https://npm.pkg.github.com"
           cache-dependency-path: '**/package-lock.json'
+
       - name: Install dependencies
         run: npm i
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
+
       - name: Check GAD status
         run: |
           curl http://localhost:3000/api/about
           curl http://localhost:3000/api/health
+
       - name: Run Playwright tests
         env:
           BASE_URL: ${{ vars.BASE_URL }}
@@ -42,3 +49,16 @@ jobs:
           USER_INCORRECT_EMAIL: ${{ secrets.USER_INCORRECT_EMAIL }}
           USER_INCORRECT_PASSWORD: ${{ secrets.USER_INCORRECT_PASSWORD }}
         run: npm run test
+
+      - name: Archive test results
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tagged Tests Report
+          path: ./playwright-report/**/*.*
+
+      - name: Publish test report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure()
+        with:
+          report_paths: './playwright-report/results.xml'
