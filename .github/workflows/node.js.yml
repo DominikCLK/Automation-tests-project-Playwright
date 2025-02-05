@@ -39,4 +39,5 @@ jobs:
           BASE_URL: ${{ vars.BASE_URL }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+          USER_INCORRECT_EMAIL: ${{ secrets.USER_INCORRECT_EMAIL }}
         run: npm run test
