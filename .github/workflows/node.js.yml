@@ -48,7 +48,7 @@ jobs:
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
           USER_INCORRECT_EMAIL: ${{ secrets.USER_INCORRECT_EMAIL }}
           USER_INCORRECT_PASSWORD: ${{ secrets.USER_INCORRECT_PASSWORD }}
-        run: npm run test
+        run: npm run test:workflow
 
       - name: Archive test results
         if: success() || failure()

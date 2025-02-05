@@ -15,9 +15,17 @@ export default defineConfig({
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
-  retries: 0,
-  workers: 2,
-  reporter: 'html',
+  retries: 1,
+  workers: process.env.CI ? 6 : undefined,
+
+  //Reporters
+  reporter: [
+    ['html'],
+    ['github'],
+    ['json', { outputFile: './playwright-report/results.json' }],
+    ['junit', { outputFile: './playwright-report/results.xml' }],
+  ],
+
   use: {
     baseURL: BASE_URL,
     actionTimeout: 0,

@@ -8,6 +8,7 @@
     "format:check": "npx prettier . --check \"!**.ts\"",
     "lint": "npx eslint . --ext .ts --max-warnings=0",
     "test": "npx playwright test",
+    "test:workflow": "BASE_URL=$BASE_URL USER_EMAIL=$USER_EMAIL USER_PASSWORD=$USER_PASSWORD USER_INCORRECT_EMAIL=$USER_INCORRECT_EMAIL USER_INCORRECT_PASSWORD=$USER_INCORRECT_PASSWORDnpx playwright test",
     "test:headed": "npm run test -- --headed",
     "test:ui": "npm run test -- --ui",
     "show-report": "npx playwright show-report"
