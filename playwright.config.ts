@@ -16,7 +16,7 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   fullyParallel: true,
   retries: 0,
-  workers: undefined,
+  workers: 2,
   reporter: 'html',
   use: {
     baseURL: BASE_URL,
