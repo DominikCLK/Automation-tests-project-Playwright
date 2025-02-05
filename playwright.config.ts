@@ -27,7 +27,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: BASE_URL,
+    baseURL: process.env.BASE_URL || BASE_URL,
     actionTimeout: 0,
     trace: 'on',
     video: 'retain-on-failure',
