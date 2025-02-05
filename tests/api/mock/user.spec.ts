@@ -1,3 +1,4 @@
+import { mockedUserData } from '@_src/test-data/mock/mock.data';
 import { expect, test } from '@playwright/test';
 
 test.describe('Test user data', () => {
@@ -86,23 +87,3 @@ test.describe('Test user data', () => {
     await expect(ageSelector).toHaveText(expectedAge);
   });
 });
-
-const mockedUserData = {
-  userId: 'U2636',
-  username: 'selinnelson235',
-  firstName: 'John',
-  lastName: 'Doe',
-  email: 'selinnelson235@test.test.com',
-  phone: '+845-777-150-7395',
-  dateOfBirth: '1980-07-06T22:00:00.000Z',
-  profilePicture: '1cfe385c-571f-4047-a717-3df0f4031590.jpg',
-  address: {
-    street: '566 Lake Street',
-    city: 'Hub City',
-    postalCode: 92115,
-    country: 'South Africa',
-  },
-  lastLogin: '2022-02-14T23:00:00.000Z',
-  accountCreated: '2019-03-21T23:00:00.000Z',
-  status: 0,
-};

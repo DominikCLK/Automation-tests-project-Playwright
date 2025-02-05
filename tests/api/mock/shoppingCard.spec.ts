@@ -1,3 +1,8 @@
+import {
+  mockedApiFullResponse,
+  mockedApiResponseMissingProductData,
+  mockedApiResponseZeroQuantityAndSubtotal,
+} from '@_src/test-data/mock/mock.data';
 import { expect, test } from '@playwright/test';
 
 test.describe('Test Shopping Cart', () => {
@@ -95,73 +100,3 @@ test.describe('Test Shopping Cart', () => {
     await expect.soft(taxCostLocator).toHaveText(expectedTaxCost);
   });
 });
-
-const mockedApiFullResponse = {
-  cartItems: [
-    {
-      product: {
-        id: 24,
-        name: 'Shaver',
-        price: 80,
-        icon: '🪒',
-      },
-      quantity: 2,
-      subtotal: 160,
-    },
-    {
-      product: {
-        id: 29,
-        name: 'Conditioner',
-        price: 4,
-        icon: '🧴',
-      },
-      quantity: 10,
-      subtotal: 40,
-    },
-  ],
-};
-
-const mockedApiResponseZeroQuantityAndSubtotal = {
-  cartItems: [
-    {
-      product: {
-        id: 24,
-        name: 'Shaver',
-        price: 80,
-        icon: '🪒',
-      },
-      quantity: 0,
-      subtotal: 0,
-    },
-    {
-      product: {
-        id: 29,
-        name: 'Conditioner',
-        price: 4,
-        icon: '🧴',
-      },
-      quantity: 10,
-      subtotal: 40,
-    },
-  ],
-};
-
-const mockedApiResponseMissingProductData = {
-  cartItems: [
-    {
-      product: {},
-      quantity: 2,
-      subtotal: 160,
-    },
-    {
-      product: {
-        id: 29,
-        name: 'Conditioner',
-        price: 4,
-        icon: '🧴',
-      },
-      quantity: 10,
-      subtotal: 40,
-    },
-  ],
-};

@@ -1,3 +1,7 @@
+import {
+  mockedWeatherApiBaseResponse,
+  mockedWeatherApiOneDayResponse,
+} from '@_src/test-data/mock/mock.data';
 import { expect, test } from '@playwright/test';
 
 test.describe('Test weather data', () => {
@@ -80,53 +84,3 @@ test.describe('Test weather data', () => {
     );
   });
 });
-
-const mockedWeatherApiBaseResponse = [
-  {
-    date: '2024-12-13',
-    city: 'Warsaw',
-    temperature: 27,
-    temperatureMin: 27,
-    temperatureMax: 30,
-    humidity: '71%',
-    dayLength: 15,
-    windSpeed: 90,
-    windSpeedRange: '40+ km/h',
-  },
-  {
-    date: '2024-12-12',
-    city: 'Warsaw',
-    temperature: 21,
-    temperatureMin: -6,
-    temperatureMax: 42,
-    humidity: '32%',
-    dayLength: 15,
-    windSpeed: 4,
-    windSpeedRange: '0-5 km/h',
-  },
-  {
-    date: '2024-12-11',
-    city: 'Warsaw',
-    temperature: 20,
-    temperatureMin: 8,
-    temperatureMax: 31,
-    humidity: '62%',
-    dayLength: 15,
-    windSpeed: 0,
-    windSpeedRange: '0-5 km/h',
-  },
-];
-
-const mockedWeatherApiOneDayResponse = [
-  {
-    date: '2024-12-10',
-    city: 'Warsaw',
-    temperature: 34,
-    temperatureMin: 28,
-    temperatureMax: 41,
-    humidity: '36%',
-    dayLength: 19,
-    windSpeed: 0,
-    windSpeedRange: '0-5 km/h',
-  },
-];
