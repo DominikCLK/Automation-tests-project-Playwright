@@ -43,22 +43,9 @@ jobs:
 
       - name: Run Playwright tests
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
+          BASE_URL: ${{ vars.BASE_URL }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
           USER_INCORRECT_EMAIL: ${{ secrets.USER_INCORRECT_EMAIL }}
           USER_INCORRECT_PASSWORD: ${{ secrets.USER_INCORRECT_PASSWORD }}
-        run: npm run test:workflow
-
-      - name: Archive test results
-        if: success() || failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: Tagged Tests Report
-          path: ./playwright-report/**/*.*
-
-      - name: Publish test report
-        uses: mikepenz/action-junit-report@v4
-        if: success() || failure()
-        with:
-          report_paths: './playwright-report/results.xml'
+        run: npm run test
