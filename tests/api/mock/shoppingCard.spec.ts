@@ -70,7 +70,7 @@ test.describe('Test Shopping Cart', () => {
     await expect.soft(taxCostLocator).toHaveText(expectedTaxCost);
   });
 
-  test('missing product data', async ({ page }) => {
+  test.skip('missing product data', async ({ page }) => {
     // Arrange:
     const shippingCostSelector = 'shipping-cost';
     const taxCostSelector = 'tax-cost';

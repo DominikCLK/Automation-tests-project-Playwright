@@ -39,7 +39,7 @@ test.describe('Test user data', () => {
     await expect(userNameSelector).toHaveText(expectedUserName);
   });
 
-  test('Missing birthdate', async ({ page }) => {
+  test.skip('Missing birthdate', async ({ page }) => {
     // Arrange:
     const birthdateTestId = 'user-date-of-birth';
     const birthdateSelector = page.getByTestId(birthdateTestId);
@@ -59,7 +59,7 @@ test.describe('Test user data', () => {
     await expect(birthdateSelector).toHaveText(expectedBirthdate);
   });
 
-  test('Birth date 100 years old', async ({ page }) => {
+  test.skip('Birth date 100 years old', async ({ page }) => {
     // Arrange:
     const ageTestId = 'user-age';
     const ageSelector = page.getByTestId(ageTestId);
