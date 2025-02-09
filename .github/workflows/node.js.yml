@@ -9,6 +9,11 @@ on:
       - main
   workflow_dispatch:
 
+  permissions:
+  contents: read
+  checks: write
+  id-token: write
+
 jobs:
   test:
     timeout-minutes: 5
