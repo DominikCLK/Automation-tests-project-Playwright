@@ -34,7 +34,23 @@ jobs:
 
       - name: Clone GAD repo
         run: git clone https://github.com/jaktestowac/gad-gui-api-demo.git
-        
+
+      - name: Install GAD dependencies
+        run: |
+          cd gad-gui-api-demo
+          npm install
+
+      - name: Start GAD application
+        run: |
+          cd gad-gui-api-demo
+          npm run start &
+          sleep 10
+
+      - name: Check GAD status
+        run: |
+          curl http://localhost:3000/api/about
+          curl http://localhost:3000/api/health
+
       - name: Run Playwright tests
         env:
           BASE_URL: ${{ vars.BASE_URL }}
