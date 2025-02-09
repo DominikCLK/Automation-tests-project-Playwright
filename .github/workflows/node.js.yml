@@ -59,3 +59,17 @@ jobs:
           USER_INCORRECT_EMAIL: ${{ secrets.USER_INCORRECT_EMAIL }}
           USER_INCORRECT_PASSWORD: ${{ secrets.USER_INCORRECT_PASSWORD }}
         run: npm run test
+
+      - name: Archive tests results
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Report
+          path: |
+            ./playwright-report/**/*.*
+
+      - name: Publish test report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure()
+        with:
+          report_paths: './playwright-report/results.xml'

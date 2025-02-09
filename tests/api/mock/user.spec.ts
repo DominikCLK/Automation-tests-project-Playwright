@@ -10,7 +10,6 @@ test.describe('Test user data', () => {
     await page.route('/api/v1/data/random/simple-user', async (route) => {
       const response = await route.fetch();
       const json = await response.json();
-      console.log(json);
       await route.fulfill({ json: json });
     });
 
@@ -19,9 +18,6 @@ test.describe('Test user data', () => {
 
     // Assert:
     await expect(userNameSelector).toBeVisible();
-
-    const userName = await userNameSelector.innerText();
-    console.log(userName);
   });
 
   test('Check username', async ({ page }) => {
@@ -33,7 +29,6 @@ test.describe('Test user data', () => {
     await page.route('/api/v1/data/random/simple-user', async (route) => {
       const response = await route.fetch();
       const json = await response.json();
-      console.log(json);
       await route.fulfill({ json: mockedUserData });
     });
 
@@ -53,7 +48,6 @@ test.describe('Test user data', () => {
     await page.route('/api/v1/data/random/simple-user', async (route) => {
       const response = await route.fetch();
       const json = await response.json();
-      console.log(json);
       json.dateOfBirth = undefined;
       await route.fulfill({ json: json });
     });
@@ -75,7 +69,6 @@ test.describe('Test user data', () => {
     await page.route('/api/v1/data/random/simple-user', async (route) => {
       const response = await route.fetch();
       const json = await response.json();
-      console.log(json);
       json.dateOfBirth = birthDate;
       await route.fulfill({ json: json });
     });
