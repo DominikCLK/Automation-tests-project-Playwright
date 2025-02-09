@@ -9,16 +9,15 @@ on:
       - main
   workflow_dispatch:
 
-  permissions:
-  contents: read
-  checks: write
-  id-token: write
-
 jobs:
   test:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     environment: test-env-gad
+    permissions:
+      contents: read
+      checks: write
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
