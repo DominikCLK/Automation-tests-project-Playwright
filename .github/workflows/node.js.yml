@@ -79,28 +79,52 @@ jobs:
           USER_INCORRECT_PASSWORD: ${{ secrets.USER_INCORRECT_PASSWORD }}
         run: npm run test -- --reporter=html
 
-      - name: Archive tests results
-        if: success() || failure()
+      - name: Archive test results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Test Report
-          path: |
-            ./playwright-report/**/*.*
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+  publish:
+    name: Publish Report
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download test results
+        uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+          path: report-data
+
+      - name: Organize report structure
+        run: |
+          mkdir -p playwright-report
+          mv report-data/* playwright-report/
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        if: hashFiles('playwright-report/index.html') != ''
+        uses: actions/configure-pages@v4
 
-      - name: Upload Playwright Report to GitHub Pages
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload Pages artifact
+        if: hashFiles('playwright-report/index.html') != ''
+        uses: actions/upload-pages-artifact@v3
         with:
           path: playwright-report/
 
       - name: Deploy to GitHub Pages
+        if: hashFiles('playwright-report/index.html') != ''
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
 
-      - name: Publish test report
-        uses: mikepenz/action-junit-report@v4
-        if: success() || failure()
-        with:
-          report_paths: './playwright-report/results.xml'
+      - name: Display deployment URL
+        if: steps.deployment.outcome == 'success'
+        run: |
+          echo "📊 Test Report deployed to: ${{ steps.deployment.outputs.page_url }}"
