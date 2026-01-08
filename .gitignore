@@ -6,3 +6,6 @@ node_modules/
 .env
 tmp/*
 !tmp/.gitkeep
+
+# Playwright
+/playwright/.auth/
